@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: micronautSandbox
+  session:
+    http:
+      cookie: true
 
 netty:
   default:

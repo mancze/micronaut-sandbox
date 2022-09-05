@@ -1,12 +1,29 @@
 ## Micronaut Documentation
 
-- [User Guide](https://docs.micronaut.io/latest/guide/index.html)
-- [API Reference](https://docs.micronaut.io/latest/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/latest/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+### Actual
 
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-## Feature http-client documentation
+```shell
+sh gradlew clean test
 
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+# ...
+# > Task :test
+#
+# SessionControllerSpecTest > subsequentRequests_ShouldNotYieldSetCookieHeader() FAILED
+#     org.opentest4j.AssertionFailedError at SessionControllerSpecTest.java:37
+#
+# 2 tests completed, 1 failed
+#
+# > Task :test FAILED
+# ...
+```
+
+### Expected
+
+```shell
+MICRONAUT_ENVIRONMENTS=workaround sh gradlew clean test
+
+# ...
+# BUILD SUCCESSFUL in 3s
+# 4 actionable tasks: 1 executed, 3 up-to-date
+# ...
+```
