@@ -1,3 +1,3 @@
 ```shell
-./gradlew :test --tests "com.example.scope.CustomScopeDoubleInitTest"
+./gradlew :test --tests "com.example.scope.AopInCustomScopeTest"
 ```

@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: micronautSandbox
+  caches:
+    my:
+      expire-after-write: 1d
 
 netty:
   default:

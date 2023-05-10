@@ -1,9 +1,11 @@
 package com.example.scope;
 
+import io.micronaut.cache.annotation.CacheConfig;
+import io.micronaut.cache.annotation.Cacheable;
+import io.micronaut.context.annotation.DefaultImplementation;
 import io.micronaut.context.scope.AbstractConcurrentCustomScope;
 import io.micronaut.context.scope.CreatedBean;
 import io.micronaut.inject.BeanIdentifier;
-import io.micronaut.runtime.context.scope.ThreadLocal;
 import jakarta.inject.Inject;
 import jakarta.inject.Scope;
 import jakarta.inject.Singleton;
@@ -14,55 +16,28 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
-public class CustomScopeDoubleInit {
-
-	static final Map<Class<?>, Integer> COUNTER = new ConcurrentHashMap<>();
+public class AopInCustomScope {
 
 	@Inject
-	CustomScopeDoubleInit() {
+	AopInCustomScope() {
 	}
 
-	static void objectCreated(Object object) {
-		var objectNumber = COUNTER.merge(object.getClass(), 1, Integer::sum);
-		System.out.printf("Created %s #%d (hashcode: %s)%n", object.getClass().getSimpleName(), objectNumber, object.hashCode());
-	}
-
-	interface Foo {
-
-		UUID getId();
-	}
-
-	@ThreadLocal
-	static class FooImpl implements Foo {
-		public final UUID id = UUID.randomUUID();
-
-		@Inject
-		FooImpl() {
-			objectCreated(this);
-		}
-
-		@Override
-		public UUID getId() {
-			return id;
-		}
-	}
-
-	interface Bar {
-		UUID getId();
+	@DefaultImplementation(MyBeanImpl.class)
+	interface MyBean {
+		UUID getCachedId();
 	}
 
 	@MyScope
-	static class BarImpl implements Bar {
-		public final UUID id = UUID.randomUUID();
+	@CacheConfig("my")
+	static class MyBeanImpl implements MyBean {
 
 		@Inject
-		BarImpl() {
-			objectCreated(this);
+		MyBeanImpl() {
 		}
 
-		@Override
-		public UUID getId() {
-			return id;
+		@Cacheable
+		public UUID getCachedId() {
+			return UUID.randomUUID();
 		}
 	}
 

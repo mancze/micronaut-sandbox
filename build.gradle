@@ -13,10 +13,11 @@ repositories {
 dependencies {
 	annotationProcessor("io.micronaut:micronaut-http-validation")
 
+	implementation("io.micronaut.cache:micronaut-cache-caffeine")
 	implementation("io.micronaut:micronaut-http-client")
 	implementation("io.micronaut:micronaut-jackson-databind")
-	implementation("jakarta.annotation:jakarta.annotation-api")
 	implementation("io.micronaut:micronaut-validation")
+	implementation("jakarta.annotation:jakarta.annotation-api")
 
 	runtimeOnly("ch.qos.logback:logback-classic")
 
