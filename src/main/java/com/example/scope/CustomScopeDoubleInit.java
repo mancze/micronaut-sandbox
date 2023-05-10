@@ -10,6 +10,7 @@ import jakarta.inject.Singleton;
 
 import java.lang.annotation.*;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
@@ -28,12 +29,12 @@ public class CustomScopeDoubleInit {
 
 	interface Foo {
 
-		double getId();
+		UUID getId();
 	}
 
 	@ThreadLocal
 	static class FooImpl implements Foo {
-		public final double id = Math.random();
+		public final UUID id = UUID.randomUUID();
 
 		@Inject
 		FooImpl() {
@@ -41,18 +42,18 @@ public class CustomScopeDoubleInit {
 		}
 
 		@Override
-		public double getId() {
+		public UUID getId() {
 			return id;
 		}
 	}
 
 	interface Bar {
-		double getId();
+		UUID getId();
 	}
 
 	@MyScope
 	static class BarImpl implements Bar {
-		public final double id = Math.random();
+		public final UUID id = UUID.randomUUID();
 
 		@Inject
 		BarImpl() {
@@ -60,7 +61,7 @@ public class CustomScopeDoubleInit {
 		}
 
 		@Override
-		public double getId() {
+		public UUID getId() {
 			return id;
 		}
 	}
