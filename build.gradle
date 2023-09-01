@@ -1,5 +1,6 @@
 plugins {
-	id("io.micronaut.application") version "4.0.2"
+	id("com.github.johnrengelman.shadow") version "7.1.2"
+	id("io.micronaut.application") version "3.4.1"
 }
 
 version = "0.1"
@@ -10,22 +11,25 @@ repositories {
 }
 
 dependencies {
-	annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
-
-	implementation("io.micronaut.serde:micronaut-serde-jackson")
-
+	annotationProcessor("io.micronaut:micronaut-http-validation")
+	implementation("io.micronaut:micronaut-http-client")
+	implementation("io.micronaut:micronaut-jackson-databind")
+	implementation("jakarta.annotation:jakarta.annotation-api")
 	runtimeOnly("ch.qos.logback:logback-classic")
-	runtimeOnly("org.yaml:snakeyaml:2.2")
+	implementation("io.micronaut:micronaut-validation")
 
-	testImplementation("io.micronaut:micronaut-http-client")
 	testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
-java {
-	sourceCompatibility = JavaVersion.toVersion("17")
-	targetCompatibility = JavaVersion.toVersion("17")
+application {
+	mainClass.set("com.example.Application")
 }
 
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
 
 micronaut {
 	runtime("netty")
@@ -35,9 +39,3 @@ micronaut {
 		annotations("com.example.*")
 	}
 }
-
-
-application {
-	mainClass.set("com.example.Application")
-}
-
