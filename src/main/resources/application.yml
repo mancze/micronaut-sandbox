@@ -1,3 +1,7 @@
+custom:
+    path: classpath:keystore.p12
+    password: _encrypted_
+
 micronaut:
     application:
         name: micronautSandbox
@@ -5,5 +9,6 @@ micronaut:
     ssl:
         enabled: true
         key-store:
-            path: classpath:keystore.p12
-            password: _encrypted_
+            custom:
+                path: classpath:keystore.p12
+                password: _encrypted_

@@ -1,8 +1,10 @@
 package com.example;
 
-import io.micronaut.context.annotation.*;
+import io.micronaut.context.annotation.BootstrapContextCompatible;
+import io.micronaut.context.annotation.ConfigurationProperties;
+import io.micronaut.context.annotation.Context;
+import io.micronaut.context.annotation.Replaces;
 import io.micronaut.http.ssl.DefaultSslConfiguration;
-import io.micronaut.http.ssl.SslConfiguration;
 import io.micronaut.runtime.Micronaut;
 import jakarta.inject.Inject;
 
@@ -26,30 +28,13 @@ public class Application {
 		}
 	}
 
-	@Secondary
+	@ConfigurationProperties("custom")
 	@BootstrapContextCompatible
-	@ConfigurationProperties("micronaut.ssl.key-store")
 	@Replaces(DefaultSslConfiguration.DefaultKeyStoreConfiguration.class)
 	static class ReplacedKeyStoreConfiguration extends DefaultSslConfiguration.DefaultKeyStoreConfiguration {
 
 		@Inject
 		ReplacedKeyStoreConfiguration() {
-		}
-
-		@Override
-		public Optional<String> getPassword() {
-			return super.getPassword()
-					.map(DECRYPTOR);
-		}
-	}
-
-	@Primary
-	@BootstrapContextCompatible
-	@ConfigurationProperties("micronaut.ssl.key-store")
-	@Replaces(DefaultSslConfiguration.DefaultKeyStoreConfiguration.class)
-	static class ExtendBaseClassKeyStoreConfiguration extends SslConfiguration.KeyStoreConfiguration {
-		@Inject
-		ExtendBaseClassKeyStoreConfiguration() {
 		}
 
 		@Override

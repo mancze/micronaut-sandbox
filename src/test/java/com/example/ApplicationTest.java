@@ -17,19 +17,10 @@ class ApplicationTest {
 	@Inject
 	Application.ReplacedKeyStoreConfiguration keyStoreConfiguration;
 
-	@Inject
-	Application.ExtendBaseClassKeyStoreConfiguration extendBaseClassKeyStoreConfiguration;
-
 	@Test
 	void keyStoreConfiguration_shouldHaveExpectedValues() {
 		assertThat(keyStoreConfiguration.getClass().getName()).isEqualTo("com.example.Application$ReplacedKeyStoreConfiguration");
 		assertKeyStoreConfiguration(keyStoreConfiguration);
-	}
-
-	@Test
-	void noReplaceNoExtendsKeyStoreConfiguration_shouldHaveExpectedValues() {
-		assertThat(extendBaseClassKeyStoreConfiguration.getClass().getName()).isEqualTo("com.example.Application$ExtendBaseClassKeyStoreConfiguration");
-		assertKeyStoreConfiguration(extendBaseClassKeyStoreConfiguration);
 	}
 
 	@Test
