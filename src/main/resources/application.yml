@@ -2,6 +2,11 @@ custom:
     path: classpath:keystore.p12
     password: _encrypted_
 
+key-store:
+    custom:
+        path: classpath:keystore.p12
+        password: _encrypted_
+
 micronaut:
     application:
         name: micronautSandbox
