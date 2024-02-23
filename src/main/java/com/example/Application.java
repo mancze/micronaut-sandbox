@@ -28,7 +28,7 @@ public class Application {
 		}
 	}
 
-	@ConfigurationProperties("custom")
+	@ConfigurationProperties("micronaut.ssl.key-store")
 	@BootstrapContextCompatible
 	@Replaces(DefaultSslConfiguration.DefaultKeyStoreConfiguration.class)
 	static class ReplacedKeyStoreConfiguration extends DefaultSslConfiguration.DefaultKeyStoreConfiguration {

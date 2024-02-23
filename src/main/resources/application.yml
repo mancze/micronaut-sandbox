@@ -1,19 +1,12 @@
-custom:
-    path: classpath:keystore.p12
-    password: _encrypted_
-
 key-store:
-    custom:
-        path: classpath:keystore.p12
-        password: _encrypted_
+    micronaut:
+        ssl:
+            key-store:
+                path: classpath:keystore.p12
+                password: _encrypted_
 
 micronaut:
-    application:
-        name: micronautSandbox
-
     ssl:
         enabled: true
         key-store:
-            custom:
-                path: classpath:keystore.p12
-                password: _encrypted_
+            __workaround_: "Required for the configuration bean replacement"
