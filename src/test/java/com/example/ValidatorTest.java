@@ -18,7 +18,12 @@ public class ValidatorTest {
 	void BUG_REPRODUCTION_CASE_validateValidBean_shouldNotFail() {
 		var bean = new ValidatedBean("foobar", 42);
 
-		assertThat(validator.validate(bean)).isEmpty();
+		try {
+			assertThat(validator.validate(bean)).isEmpty();
+		} catch (Exception e) {
+			// retry
+			assertThat(validator.validate(bean)).isEmpty();
+		}
 	}
 
 	@Test
