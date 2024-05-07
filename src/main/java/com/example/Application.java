@@ -21,7 +21,7 @@ public class Application {
 		@Get("/list-nullable")
 		String list(
 				@QueryValue(value = "v", defaultValue = "")
-				@Nullable List<String> values
+				List<String> values
 		) {
 			return "values == null: %s\n".formatted(values == null)
 					+ "values: %s\n".formatted(values)
