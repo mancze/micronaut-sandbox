@@ -1,8 +1,3 @@
 micronaut:
   application:
     name: micronautSandbox
-
-netty:
-  default:
-    allocator:
-      max-order: 3
