@@ -10,9 +10,11 @@ repositories {
 }
 
 dependencies {
+	annotationProcessor("io.micronaut.security:micronaut-security-annotations")
 	annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
 
 	implementation("io.micronaut.serde:micronaut-serde-jackson")
+	implementation("io.micronaut.security:micronaut-security-session")
 
 	runtimeOnly("ch.qos.logback:logback-classic")
 	runtimeOnly("org.yaml:snakeyaml:2.2")
